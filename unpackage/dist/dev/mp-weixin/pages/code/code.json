@@ -1,6 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "u-message-input": "/uview/components/u-message-input/u-message-input"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "home-recommend": "/components/homeRecommend"
-  }
-}

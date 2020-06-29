@@ -1,0 +1,14 @@
+.idea
+*.swp
+.DS_Store
+templates/*
+vendor
+dist/
+node_modules
+*.sublime-project
+*.sublime-workspace
+*.iml
+.vscode
+*.pyc
+composer.lock
+unpackage/

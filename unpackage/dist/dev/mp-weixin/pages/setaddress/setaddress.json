@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "新增收货地址",
-  "usingComponents": {
-    "u-picker": "/uview/components/u-picker/u-picker"
-  }
-}
