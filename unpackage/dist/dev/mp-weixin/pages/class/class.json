@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "class-right-list": "/components/classRightList"
+  }
+}

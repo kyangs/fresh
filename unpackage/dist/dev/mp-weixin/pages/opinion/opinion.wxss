@@ -1,0 +1,104 @@
+
+.opinion.data-v-11adafe8{
+	width: 100%;
+	min-height: 100%;
+	padding-top: 20rpx;
+	box-sizing: border-box;
+}
+/* 文字描述 */
+.opinion-text.data-v-11adafe8{
+	width: 100%;
+	height: auto;
+	border-top: 2rpx solid #E9E9E9;
+	border-bottom: 2rpx solid #E9E9E9;
+	background: #FFFFFF;
+	padding-bottom: 30rpx;
+	box-sizing: border-box;
+	margin-bottom: 30rpx;
+}
+.opinion-text-name.data-v-11adafe8{
+	width: 100%;
+	height: 86rpx;
+	padding: 0 10rpx;
+	box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	line-height: 86rpx;
+}
+.opinion-text-name-left.data-v-11adafe8{
+	width: 32rpx;
+	height: 100%;
+	font-size: 36rpx;
+	color: #E55435;
+}
+.opinion-text-name-left text.data-v-11adafe8{
+	color: #E55435;
+}
+.opinion-text-name-right.data-v-11adafe8{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 100%;
+	font-size: 30rpx;
+	color: #434343;
+	padding-left: 10rpx;
+	box-sizing: border-box;
+}
+.opinion-text-box.data-v-11adafe8{
+	width: 100%;
+	height: auto;
+	padding: 5rpx 30rpx;
+	box-sizing: border-box;
+}
+.opinion-text-box-list.data-v-11adafe8{
+	height: 70rpx;
+	line-height: 70rpx;
+	padding: 0 20rpx;
+	box-sizing: border-box;
+	border: 2rpx solid #D7D7D7;
+	border-radius: 35rpx;
+	display: inline-block;
+	margin-bottom: 20rpx;
+	margin-right: 20rpx;
+}
+.opinion-text-textarea.data-v-11adafe8{
+	width: 100%;
+	height: 180rpx;
+	padding: 0 20rpx;
+	box-sizing: border-box;
+}
+.opinion-text-textarea-box.data-v-11adafe8{
+	width: 100%;
+	height: 100%;
+}
+/* 图片 */
+.opinion-image.data-v-11adafe8{
+	width: 100%;
+	height: auto;
+	border-top: 2rpx solid #E9E9E9;
+	border-bottom: 2rpx solid #E9E9E9;
+	margin-bottom: 50rpx;
+}
+/* 提交 */
+.opinion-submit.data-v-11adafe8{
+	width: 100%;
+	height: auto;
+	padding: 10rpx 25rpx;
+	box-sizing: border-box;
+}
+.opinion-submit-btn.data-v-11adafe8{
+	width: 100%;
+	height: 80rpx;
+	background-image: -webkit-linear-gradient(left, #1692E2, #0081D5);
+	background-image: linear-gradient(to right, #1692E2, #0081D5);
+	border-radius: 10rpx;
+	text-align: center;
+	line-height: 80rpx;
+	font-size: 30rpx;
+	color: #FFFFFF;
+}
+

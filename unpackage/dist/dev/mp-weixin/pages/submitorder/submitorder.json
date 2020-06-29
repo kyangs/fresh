@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "submit-goods-list": "/components/submitGoodsList",
+    "submit-order": "/components/submitCoupon"
+  }
+}

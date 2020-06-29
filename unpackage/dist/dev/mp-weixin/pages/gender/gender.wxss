@@ -1,0 +1,54 @@
+
+.gender.data-v-5162dab4{
+	width: 100%;
+	height: 100%;
+}
+.gender-box.data-v-5162dab4{
+	width: 100%;
+	padding-left: 24rpx;
+	box-sizing: border-box;
+	background: #FFFFFF;
+}
+.gender-box-list.data-v-5162dab4{
+	width: 100%;
+	border-bottom: 1rpx solid #F3F3F3;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	height: 95rpx;
+	line-height: 95rpx;
+}
+.gender-box-list.data-v-5162dab4:nth-last-child(1){
+	border-bottom-color: #FFFFFF;
+}
+.gender-box-list-left.data-v-5162dab4{
+	width: 280rpx;
+	height: 100%;
+	font-size: 30rpx;
+	color: #000000;
+}
+.gender-box-list-right.data-v-5162dab4{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 100%;
+	padding-right: 30rpx;
+	height: 95rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	        justify-content: flex-end;
+	
+	color: #39D134;
+}
+.gender-box-list-right text.data-v-5162dab4{
+	color: #39D134;
+	font-size: 30rpx;
+	font-weight: bolder;
+}
+

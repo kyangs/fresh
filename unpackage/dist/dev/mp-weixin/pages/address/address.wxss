@@ -1,0 +1,123 @@
+
+.address{
+	width: 100%;
+	height: 100%;
+}
+/* 标题 */
+.address-title{
+	width: 100%;
+	height: 90rpx;
+	/* background: #007AFF; */
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.address-title-left{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 90rpx;
+	color: #494E51;
+	line-height: 90rpx;
+}
+.address-title-left-icon{
+	width: 96rpx;
+	height: 100%;
+	line-height: 90rpx;
+	text-align: center;
+	color: #000000;
+	display: inline-block;
+	font-size: 40rpx;
+}
+.address-title-left-name{
+	line-height: 90rpx;
+	color: #494E51;
+	font-size: 34rpx;
+}
+.address-title-right{
+	width: 180rpx;
+	height: 90rpx;
+	text-align: center;
+	line-height: 90rpx;
+	color: #575757;
+	font-size: 30rpx;
+}
+/* 地址列表 */
+.address-box{
+	width: 100%;
+	height: calc(100% - 90rpx - 25px);
+	/* background: #007AFF; */
+}
+.address-box-scroll{
+	width: 100%;
+	height: 100%;
+}
+.address-box-scroll-list{
+	width: 100%;
+	height: 140rpx;
+	background: #FFFFFF;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	margin-bottom: 15rpx;
+}
+.address-box-scroll-list-left{
+	width: 88rpx;
+	height: 140rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	/* background: #0086B3; */
+}
+.address-box-scroll-list-centent{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 140rpx;
+	padding-top: 22rpx;
+	box-sizing: border-box;
+}
+.address-box-scroll-list-centent-name{
+	width: 100%;
+	height: 50rpx;
+	line-height: 50rpx;
+	color: #000000;
+	font-size: 26rpx;
+	font-weight: bold;
+	overflow: hidden;
+}
+.address-box-scroll-list-centent-default{
+	width: 100%;
+	height: 46rpx;
+	line-height: 46rpx;
+	color: #3F4346;
+	font-size: 24rpx;
+	overflow: hidden;
+}
+.address-box-scroll-list-centent-default-text{
+	margin-right: 20rpx;
+}
+.address-box-scroll-list-right{
+	width: 86rpx;
+	height: 140rpx;
+	/* background: #17C734; */
+	text-align: center;
+	line-height: 140rpx;
+}
+.address-box-scroll-list-right-icon{
+	color: #919095;
+	font-size: 38rpx;
+}
+

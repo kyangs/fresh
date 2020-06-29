@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "u-count-down": "/uview/components/u-count-down/u-count-down"
+  },
+  "component": true
+}

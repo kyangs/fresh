@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-divider": "/uview/components/u-divider/u-divider",
+    "char-list": "/components/charList"
+  }
+}

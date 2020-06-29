@@ -1,0 +1,11 @@
+{
+  "navigationStyle": "custom",
+  "onReachBottomDistance": 150,
+  "usingComponents": {
+    "main-nav": "/components/mainNav",
+    "main-features": "/components/mainFeatures",
+    "main-navigation": "/components/mainNavigation",
+    "main-centent": "/components/mainCentent",
+    "main-spike": "/components/mainSpike"
+  }
+}

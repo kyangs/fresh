@@ -1,0 +1,1 @@
+<view class="mainNavBox"><block wx:for="{{navList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="mainNavBox-list"><view class="mainNavBox-list-img"><image src="{{item.url}}"></image></view><view class="mainNavBox-list-text">{{''+item.name+''}}</view></view></block></view>

@@ -1,0 +1,25 @@
+
+.border.data-v-127632e4{
+	width: 100%;
+	height: 100%;
+}
+.border-head.data-v-127632e4{
+	width: 100%;
+	height: 120rpx;
+	background: #FFFFFF;
+}
+.border-box.data-v-127632e4{
+	width: 100%;
+	height: calc(100% - 120rpx);
+}
+.border-box-scroll.data-v-127632e4{
+	width: 100%;
+	height: 100%;
+	padding-top: 20rpx;
+	box-sizing: border-box;
+}
+.border-box-swiper.data-v-127632e4{
+	width: 100%;
+	height: 100%;
+}
+
