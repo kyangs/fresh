@@ -1,0 +1,19 @@
+{
+  "name": "uniapp",
+  "version": "1.0.0",
+  "description": "fresh",
+  "main": "main.js",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "vant": "^2.5.2",
+    "vue": "^2.5.22",
+    "less": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {},
+  "author": "",
+  "license": "ISC"
+}
