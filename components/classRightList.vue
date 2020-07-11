@@ -1,6 +1,6 @@
 <template>
-	<view class="classRightListBox">
-		<view class="classRightListBox-left" @click="goShopping">
+	<view class="classRightListBox" @click="goShopping">
+		<view class="classRightListBox-left">
 			<image src="../static/image/characteristic/00-07-53.png"></image>
 		</view>
 		<view class="classRightListBox-right">

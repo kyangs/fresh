@@ -76,7 +76,6 @@
 	width: 100%;
 	height: auto;
 	background: #FFFFFF;
-	padding: 15rpx 20rpx 15rpx;
 	box-sizing: border-box;
 }
 .mainFeatures-box-title{

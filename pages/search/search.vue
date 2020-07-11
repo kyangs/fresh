@@ -126,7 +126,9 @@
 		},
 		methods: {
 			goBack(){
-				
+				uni.navigateBack({
+				    delta: 1
+				});
 			}
 		}
 	}

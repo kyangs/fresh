@@ -6,7 +6,7 @@
 		<!-- 顶部 返回 和 分享 按钮 -->
 		<view class="shopping-swipe-head" :style=" 'background-color: rgba(255,255,255,'+ (num/100) + ' );' ">
 			<!-- <view class="lg text-gray cuIcon-back shopping-swipe-head-icon"></view> -->
-			<u-icon name="arrow-leftward" color="#A2A1A7" size="36"></u-icon>
+			<u-icon name="arrow-leftward" color="#A2A1A7" size="36" @click="goBack"></u-icon>
 			<view class="shopping-swipe-head-title">
 				<scroll-view scroll-x class="bg-white nav text-center shopping-swipe-head-title-scroll" >
 					<view class="cu-item" :class="titleIndex == 0 ? 'text-blue cur' : '' " :style="{opacity: num/100 }" @click="scrollClick(0)">
@@ -320,6 +320,11 @@
 				if(num === 3){
 					this.scrollTop = this.similar - this.head + 10
 				}
+			},
+			goBack(){
+				uni.navigateBack({
+				    delta: 1
+				});
 			}
 		}
 	}

@@ -82,8 +82,7 @@
 			</view>
 			<!-- 广告 -->
 			<view v-if="advPosition.home_notice.full_path" class="main-ad">
-				<image class="main-ad-img" 
-				:src="advPosition.home_notice.full_path"></image>
+				<image class="main-ad-img" :src="advPosition.home_notice.full_path"></image>
 			</view>
 			<!-- 主导航 -->
 			<view class="main-nav">
@@ -177,21 +176,14 @@
 
 			home() {
 				let _this = this
-
-				uni.request({
-					url: _this.url + '/api/home/index',
-					method: 'GET',
-					data: {
-						time: _this.now()
-					},
-				}).then(res => {
-					let response = res[1]
-					console.log(response.data.data)
-					_this.swiperList = response.data.data.adv_list.home
-					if (response.data.data.adv_list.home_notice) {
-						_this.advPosition.home_notice = response.data.data.adv_list.home_notice[0]
+				_this.get("/home/index", {
+					time: _this.now()
+				}).then(response => {
+					_this.swiperList = response.data.adv_list.home
+					if (response.data.adv_list.home_notice) {
+						_this.advPosition.home_notice = response.data.adv_list.home_notice[0]
 					}
-					_this.navList = response.data.data.category_list
+					_this.navList = response.data.category_list
 				})
 			},
 			// 获取导航条距离顶部的相对高度
