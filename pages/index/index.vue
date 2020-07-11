@@ -87,7 +87,7 @@
 			</view>
 			<!-- 主导航 -->
 			<view class="main-nav">
-				<main-nav></main-nav>
+				<main-nav :navList="navList"></main-nav>
 			</view>
 			<!-- 秒杀 -->
 			<view class="main-spike">
@@ -110,16 +110,17 @@
 </template>
 
 <script>
-	import mainNav from '../../components/mainNav.vue'
-	import mainFeatures from '../../components/mainFeatures.vue'
-	import mainNavigation from '../../components/mainNavigation.vue'
-	import mainCentent from '../../components/mainCentent.vue'
-	import mainSpike from '../../components/mainSpike.vue'
+	import mainNav from '@/components/mainNav.vue'
+	import mainFeatures from '@/components/mainFeatures.vue'
+	import mainNavigation from '@/components/mainNavigation.vue'
+	import mainCentent from '@/components/mainCentent.vue'
+	import mainSpike from '@/components/mainSpike.vue'
 	export default {
 		data() {
 			return {
 				title: 'Hello',
 				swiperList: [],
+				navList: [],
 				advPosition: {
 					home_notice: {
 						full_path: ''
@@ -185,10 +186,12 @@
 					},
 				}).then(res => {
 					let response = res[1]
-					_this.swiperList = response.data.data.home
-					if (response.data.data.home_notice) {
-						_this.advPosition.home_notice = response.data.data.home_notice[0]
+					console.log(response.data.data)
+					_this.swiperList = response.data.data.adv_list.home
+					if (response.data.data.adv_list.home_notice) {
+						_this.advPosition.home_notice = response.data.data.adv_list.home_notice[0]
 					}
+					_this.navList = response.data.data.category_list
 				})
 			},
 			// 获取导航条距离顶部的相对高度

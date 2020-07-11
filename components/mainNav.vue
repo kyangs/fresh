@@ -3,7 +3,7 @@
 	<view class="mainNavBox">
 		<view class="mainNavBox-list" v-for="(item,index) in navList" :key='index'>
 			<view class="mainNavBox-list-img">
-				<image :src="item.url"></image>
+				<image :src="item.full_url"></image>
 			</view>
 			<view class="mainNavBox-list-text">
 				{{item.name}}
@@ -14,52 +14,11 @@
 
 <script>
 	export default {
+		props:['navList'],
 		data() {
 			return {
-				navList:[
-					{
-						name: '安心蔬菜',
-						url: '../../static/image/nav/00-00-49.png'
-					},
-					{
-						name: '肉禽蛋',
-						url: '../../static/image/nav/00-00-43.png'
-					},
-					{
-						name: '生鲜海鲜',
-						url: '../../static/image/nav/00-00-40.png'
-					},
-					{
-						name: '时令水果',
-						url: '../../static/image/nav/00-00-37.png'
-					},
-					{
-						name: '粮油调味',
-						url: '../../static/image/nav/00-00-31.png'
-					},
-					{
-						name: '乳品早点',
-						url: '../../static/image/nav/00-00-34.png'
-					},
-					{
-						name: '酒水饮料',
-						url: '../../static/image/nav/00-00-08.png'
-					},
-					{
-						name: '速冻食品',
-						url: '../../static/image/nav/00-00-25.png'
-					},
-					{
-						name: '生鲜饮食',
-						url: '../../static/image/nav/00-00-28.png'
-					},
-					{
-						name: '家具个护',
-						url: '../../static/image/nav/00-00-22.png'
-					}
-				]
 			};
-		}
+		},
 	}
 </script>
 
