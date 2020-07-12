@@ -19,6 +19,7 @@ Vue.prototype.isTabBar = function(page) {
 		"/pages/index/index",
 		"/pages/find/find",
 	];
+	console.log(page)
 	for (let i = 0; i < tabar.length; i++) {
 		if (page.search(tabar[i]) !== -1) {
 			return true

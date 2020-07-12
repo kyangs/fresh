@@ -61,16 +61,10 @@
 					<view class="main-announcement-box-left">
 						<swiper class="main-announcement-box-left-box" :autoplay="true" :interval="5000" :circular='true' :vertical='true'
 						 :disable-touch='true'>
-							<swiper-item>
-								<view class="main-announcement-box-left-box-list">
-									<text>公告</text>
-									<text>配送到家功能上线,满29即可包邮</text>
-								</view>
-							</swiper-item>
-							<swiper-item>
-								<view class="main-announcement-box-left-box-list">
-									<text>优惠</text>
-									<text>配送到家功能上线,满29即可包邮</text>
+							<swiper-item v-for="(v) in notice_list" :key="v.id">
+								<view @click="routerTo('/pages/notice/detail?id='+v.id)" class="main-announcement-box-left-box-list">
+									<text>{{ v.tag }}</text>
+									<text>{{ v.title }}</text>
 								</view>
 							</swiper-item>
 						</swiper>
@@ -120,6 +114,7 @@
 				title: 'Hello',
 				swiperList: [],
 				navList: [],
+				notice_list: [],
 				advPosition: {
 					home_notice: {
 						full_path: ''
@@ -189,13 +184,14 @@
 			home() {
 				let _this = this
 				let param = {}
-				
+
 				_this.post("/home/index", param).then(response => {
 					_this.swiperList = response.data.adv_list.home
 					if (response.data.adv_list.home_notice) {
 						_this.advPosition.home_notice = response.data.adv_list.home_notice[0]
 					}
 					_this.navList = response.data.category_list
+					_this.notice_list = response.data.notice_list
 				})
 			},
 			// 获取导航条距离顶部的相对高度
