@@ -26,9 +26,10 @@
 			goCategory(id) {
 
 				uni.reLaunch({
-					url:'/pages/class/class?category_id=' + id
+					url: '/pages/class/class?category_id=' + id
 				});
 			},
+			
 		},
 	}
 </script>

@@ -4,9 +4,10 @@
 			<view class="status_bar">
 				<!-- 这里是状态栏 -->
 			</view>
-			<view class="content-search-box">
-				<view class="content-search-box-input">
-					<text>生姜</text>
+			<!-- 搜索 -->
+			<view class="content-search-box" :style="scrollOff ? 'background: #ffffff;' : '' ">
+				<view class="content-search-box-input" :style="scrollOff ? 'background: #f7f7f7;' : '' " @click="routerTo('/pages/search/search')">
+					<text>{{ mainNavigation }}</text>
 					<text class="lg text-gray cuIcon-search"></text>
 				</view>
 			</view>
@@ -71,9 +72,21 @@
 						</view>
 					</view>
 					<!-- 滑动区域 -->
-					<scroll-view class="classBox-swipe-right-bottom--scroll" scroll-y>
+					<scroll-view class="classBox-swipe-right-bottom--scroll" scroll-y @scrolltolower="scrollBottomEvent">
 						<view class="classBox-swipe-right-bottom--scroll-box">
 							<!-- <view class="classBox-swipe-right-bottom-scroll-box-title">推荐</view> -->
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
 							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
 							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
 							<view class="classBox-swipe-right-bottom--scroll-box-foot">到底了,看看别的分类吧</view>
@@ -94,9 +107,15 @@
 				current_index: 0,
 				children_index: -1,
 				category_list: [],
+				mainNavigation: '',
 				current_children: [],
+				scrollOff: false,
 			}
 		},
+		mounted() {
+			
+		},
+	
 		onLoad(option) {
 			if (option.category_id) {
 				this.category_id = parseInt(option.category_id)
@@ -104,7 +123,9 @@
 			this.getCateList()
 		},
 		methods: {
-
+			scrollBottomEvent(){
+				console.log(11)
+			},
 			getGoods() {
 				let _this = this
 				let parentRow = _this.category_list[_this.current_index]
@@ -161,8 +182,8 @@
 
 					}
 				})
-
 			},
+			// 页面滚动事件
 		},
 
 		components: {

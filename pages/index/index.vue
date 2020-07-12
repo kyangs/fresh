@@ -18,7 +18,7 @@
 			<!-- 搜索 -->
 			<view class="content-search-box" :style="scrollOff ? 'background: #ffffff;' : '' ">
 				<view class="content-search-box-input" :style="scrollOff ? 'background: #f7f7f7;' : '' " @click="goSearch">
-					<text>生姜{{mainNavigation}}</text>
+					<text>{{ mainNavigation }}</text>
 					<text class="lg text-gray cuIcon-search"></text>
 				</view>
 			</view>
@@ -48,7 +48,7 @@
 			<view class="main-swipe">
 				<swiper class="screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
 				 duration="500">
-					<swiper-item v-for="(item,index) in swiperList" :key="index">
+					<swiper-item v-for="(item,index) in swiperList" @click="routerTo(item.link)" :key="index">
 						<image :src="item.full_path" mode="aspectFill">
 
 						</image>
@@ -82,7 +82,7 @@
 			</view>
 			<!-- 广告 -->
 			<view v-if="advPosition.home_notice.full_path" class="main-ad">
-				<image class="main-ad-img" :src="advPosition.home_notice.full_path"></image>
+				<image class="main-ad-img" @click="routerTo(advPosition.home_notice.link)" :src="advPosition.home_notice.full_path"></image>
 			</view>
 			<!-- 主导航 -->
 			<view class="main-nav">
@@ -127,7 +127,7 @@
 				},
 				scrollOff: false,
 				mainNavigationOff: true, // 导购条距离顶部的距离
-				mainNavigation: 0,
+				mainNavigation: '',
 				navigation: 0,
 				search: 0,
 				status: 0,
@@ -137,18 +137,11 @@
 			}
 		},
 		onLoad() {
-			let location = uni.getLocation({
-
-			})
-			this.current_location = '上海'
+			this.location()
 			this.home()
 		},
 		mounted() {
 			let _this = this
-			this.$nextTick(function() {
-				// console.log(123)
-
-			})
 		},
 		// 页面滚动事件
 		onPageScroll(data) {
@@ -165,20 +158,39 @@
 				this.infoNavigation()
 			})
 			//#endif
-
-
 		},
 		// 页面触底事件
 		onReachBottom() {
-			// console.log('触底了')
+			console.log('触底了')
 		},
 		methods: {
-
+			location() {
+				let _this = this
+				uni.getLocation({
+					type: 'wgs84',
+					success: function(res) {
+						_this.post("/location/location", {
+							latitude: res.latitude,
+							longitude: res.longitude,
+						}).then(response => {
+							if (response.data.location) {
+								uni.setStorageSync('current_location', JSON.stringify(response.data.location))
+								_this.current_location = response.data.location.formatted_address
+							}
+						})
+					},
+					fail: (res) => {
+						uni.showToast({
+							title: "地址信息获取失败请打开获取位置权限"
+						})
+					}
+				})
+			},
 			home() {
 				let _this = this
-				_this.get("/home/index", {
-					time: _this.now()
-				}).then(response => {
+				let param = {}
+				
+				_this.post("/home/index", param).then(response => {
 					_this.swiperList = response.data.adv_list.home
 					if (response.data.adv_list.home_notice) {
 						_this.advPosition.home_notice = response.data.adv_list.home_notice[0]

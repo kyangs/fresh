@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App'
+import App from '@/App'
 
 Vue.config.productionTip = false
 
@@ -12,9 +12,38 @@ Vue.prototype.isArray = Array.isArray || function(obj) {
 	return obj instanceof Array;
 }
 
-Vue.prototype.request = (request_url, data, method) => {
+// 判断url是不是tabBar
+Vue.prototype.isTabBar = function(page) {
+	let tabar = [
+		"/pages/class/class",
+		"/pages/index/index",
+		"/pages/find/find",
+	];
+	for (let i = 0; i < tabar.length; i++) {
+		if (page.search(tabar[i]) !== -1) {
+			return true
+		}
+	}
+	return false
+}
+
+// 路由跳转
+Vue.prototype.routerTo = function(url) {
+	let tabar = this.isTabBar(url)
+	if (tabar) {
+		return uni.reLaunch({
+			url: url
+		});
+	}
+	return uni.navigateTo({
+		url: url
+	});
+}
+
+Vue.prototype.request = function(request_url, data, method) {
+	let _this = this
 	return uni.request({
-		url: Vue.prototype.url + request_url,
+		url: _this.url + request_url,
 		method: method,
 		data: data,
 		dataType: 'json',
@@ -33,14 +62,16 @@ Vue.prototype.request = (request_url, data, method) => {
 		})
 	})
 }
-Vue.prototype.get = (request_url, data) => {
-	return Vue.prototype.request(request_url, data, 'GET')
+
+
+Vue.prototype.get = function(request_url, data)  {
+	return this.request(request_url, data, 'GET')
 }
-Vue.prototype.post = (request_url, data) => {
-	return Vue.prototype.request(request_url, data, 'POST')
+Vue.prototype.post = function(request_url, data){
+	return this.request(request_url, data, 'POST')
 }
-Vue.prototype.put = (request_url, data) => {
-	return Vue.prototype.request(request_url, data, 'PUT')
+Vue.prototype.put = function(request_url, data) {
+	return this.request(request_url, data, 'PUT')
 }
 // 引入全局uView
 import uView from "@/uview/index";
