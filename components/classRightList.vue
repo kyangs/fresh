@@ -1,17 +1,17 @@
 <template>
-	<view class="classRightListBox" @click="goShopping(goodsInfo)">
-		<view class="classRightListBox-left">
+	<view class="classRightListBox">
+		<view class="classRightListBox-left" @click="goShopping(goodsInfo)">
 			<image :src="goodsInfo.main_image_url"></image>
 		</view>
 		<view class="classRightListBox-right">
-			<view class="classRightListBox-right-name">{{goodsInfo.goods_name}}</view>
-			<view class="classRightListBox-right-title">{{goodsInfo.short_desc}}</view>
+			<view class="classRightListBox-right-name" @click="goShopping(goodsInfo)">{{goodsInfo.goods_name}}</view>
+			<view v-if="goodsInfo.short_desc !== ''" class="classRightListBox-right-title">{{goodsInfo.short_desc}}</view>
 			<view class="classRightListBox-right-lable">
 				<text v-if="goodsInfo.self_sale !==''" class="classRightListBox-right-lable-list" style="color: #FC1AE8; border-color: #FC1AE8;">{{ goodsInfo.self_sale }}</text>
 				<text v-for="tag in goodsInfo.tag_list" class="classRightListBox-right-lable-list">{{ tag }}</text>
 			</view>
 			<view class="classRightListBox-right-prick">
-				<view class="classRightListBox-right-prick-left">
+				<view class="classRightListBox-right-prick-left" @click="goShopping(goodsInfo)">
 					<view class="classRightListBox-right-prick-left-prick1">
 						<text>¥</text>
 						<text>{{goodsInfo.price}}</text>
@@ -22,7 +22,7 @@
 					</view>
 				</view>
 				<view class="classRightListBox-right-prick-right">
-					<text class="cuIcon-add"></text>
+					<text class="cuIcon-add" @click="addToMyCart(goodsInfo)"></text>
 				</view>
 			</view>
 		</view>
@@ -44,7 +44,10 @@
 					url: '/pages/shopping/shopping?goodsId=' + row.id
 				});
 				console.log('跳转')
-			}
+			},
+			addToMyCart(row) {
+				
+			},
 		}
 	}
 </script>
