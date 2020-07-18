@@ -75,20 +75,9 @@
 					<scroll-view class="classBox-swipe-right-bottom--scroll" scroll-y @scrolltolower="scrollBottomEvent">
 						<view class="classBox-swipe-right-bottom--scroll-box">
 							<!-- <view class="classBox-swipe-right-bottom-scroll-box-title">推荐</view> -->
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
-							<classRightList class='classBox-swipe-right-bottom--scroll-box-list' />
+
+							<classRightList v-for="goodsInfo in goodsList" :goodsInfo="goodsInfo" class='classBox-swipe-right-bottom--scroll-box-list' />
+
 							<view class="classBox-swipe-right-bottom--scroll-box-foot">到底了,看看别的分类吧</view>
 						</view>
 					</scroll-view>
@@ -110,12 +99,15 @@
 				mainNavigation: '',
 				current_children: [],
 				scrollOff: false,
+				goodsList: [],
+				page: 1,
+				total: 0,
 			}
 		},
 		mounted() {
-			
+
 		},
-	
+
 		onLoad(option) {
 			if (option.category_id) {
 				this.category_id = parseInt(option.category_id)
@@ -123,31 +115,13 @@
 			this.getCateList()
 		},
 		methods: {
-			scrollBottomEvent(){
+			scrollBottomEvent() {
 				console.log(11)
-			},
-			getGoods() {
-				let _this = this
-				let parentRow = _this.category_list[_this.current_index]
-				let param = {
-					time: _this.now(),
-					parent_id: parentRow.id,
-					children_id: -1,
-					sort: '',
-				}
-				let childRow = {}
-				if (_this.children_index !== -1) {
-					childRow = parentRow.children[_this.children_index]
-					param.children_id = childRow.id
-				}
-				_this.request('/api/goods/list', param).then(res => {
-					console.log(res)
-				})
 			},
 			selectChildCategory(row, index) {
 				let _this = this
 				_this.children_index = index
-				_this.getGoods()
+				_this.getGoodsList()
 			},
 			goShopping() {
 				uni.navigateTo({
@@ -161,7 +135,7 @@
 				_this.category_id = _this.category_list[index].id
 				_this.current_children = _this.category_list[index].children
 				_this.children_index = -1
-				_this.getGoods()
+				_this.getGoodsList()
 			},
 			getCateList() {
 				let _this = this
@@ -179,11 +153,28 @@
 								break
 							}
 						}
-
 					}
+					_this.getGoodsList()
 				})
 			},
-			// 页面滚动事件
+			//
+			getGoodsList() {
+				let _this = this
+				let param = {
+					goods_name: '',
+					child_id: 0,
+					cate_id:_this.category_list[_this.current_index].id,
+				}
+				let child_id = 0;
+				if (_this.current_children[_this.children_index]) {
+					param.child_id = _this.current_children[_this.children_index].id
+				}
+				_this.post('/goods/list', param).then(response => {
+					console.log(response.data.data)
+					_this.goodsList = response.data.data
+					_this.total = response.data.total
+				})
+			},
 		},
 
 		components: {
