@@ -715,6 +715,7 @@
 		font-size: 0;
 		padding: 20rpx;
 		box-sizing: border-box;
+		text-align: center;
 	}
 
 	/* 相似商品 */
