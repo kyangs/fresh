@@ -78,7 +78,7 @@
 
 							<classRightList v-for="goodsInfo in goodsList" :goodsInfo="goodsInfo" class='classBox-swipe-right-bottom--scroll-box-list' />
 
-							<view class="classBox-swipe-right-bottom--scroll-box-foot">到底了,看看别的分类吧</view>
+							<view class="classBox-swipe-right-bottom--scroll-box-foot">我是有底线的</view>
 						</view>
 					</scroll-view>
 				</view>
