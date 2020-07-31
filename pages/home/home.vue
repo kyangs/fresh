@@ -109,7 +109,7 @@
 </template>
 
 <script>
-	import homeRecommend from '../../components/homeRecommend.vue'
+	import homeRecommend from '@/components/homeRecommend.vue'
 	export default {
 		data() {
 			return {

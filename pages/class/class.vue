@@ -76,7 +76,7 @@
 						<view class="classBox-swipe-right-bottom--scroll-box">
 							<!-- <view class="classBox-swipe-right-bottom-scroll-box-title">推荐</view> -->
 
-							<classRightList v-for="goodsInfo in goodsList" :goodsInfo="goodsInfo" class='classBox-swipe-right-bottom--scroll-box-list' />
+							<classRightList v-for="(goodsInfo,index) in goodsList" :key="index" :goodsInfo="goodsInfo" class='classBox-swipe-right-bottom--scroll-box-list' />
 
 							<view class="classBox-swipe-right-bottom--scroll-box-foot">我是有底线的</view>
 						</view>

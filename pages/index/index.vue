@@ -108,6 +108,7 @@
 	import mainNavigation from '@/components/mainNavigation.vue'
 	import mainCentent from '@/components/mainCentent.vue'
 	import mainSpike from '@/components/mainSpike.vue'
+	import amap from '@/components/amap-wx.js'
 	export default {
 		data() {
 			return {
@@ -133,6 +134,8 @@
 		},
 		onLoad() {
 			this.location()
+		},
+		created() {
 			this.home()
 		},
 		mounted() {
@@ -161,6 +164,7 @@
 		methods: {
 			location() {
 				let _this = this
+		
 				uni.getLocation({
 					type: 'wgs84',
 					success: function(res) {
@@ -186,7 +190,11 @@
 				let param = {}
 
 				_this.post("/home/index", param).then(response => {
-					_this.swiperList = response.data.adv_list.home
+					console.log(response)
+					if(response.data.adv_list.home){
+						_this.swiperList = response.data.adv_list.home
+					}
+					
 					if (response.data.adv_list.home_notice) {
 						_this.advPosition.home_notice = response.data.adv_list.home_notice[0]
 					}
