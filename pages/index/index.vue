@@ -164,6 +164,7 @@
 				uni.getLocation({
 					type: 'wgs84',
 					success: function(res) {
+						console.log(res.address)
 						_this.post("/location/location", {
 							latitude: res.latitude,
 							longitude: res.longitude,
