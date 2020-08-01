@@ -8,7 +8,7 @@
 			<view v-if="goodsInfo.short_desc !== ''" class="classRightListBox-right-title">{{goodsInfo.short_desc}}</view>
 			<view class="classRightListBox-right-lable">
 				<text v-if="goodsInfo.self_sale !==''" class="classRightListBox-right-lable-list" style="color: #FC1AE8; border-color: #FC1AE8;">{{ goodsInfo.self_sale }}</text>
-				<text v-for="tag in goodsInfo.tag_list" class="classRightListBox-right-lable-list">{{ tag }}</text>
+				<text v-for="(tag,index) in goodsInfo.tag_list" :key="index" class="classRightListBox-right-lable-list">{{ tag }}</text>
 			</view>
 			<view class="classRightListBox-right-prick">
 				<view class="classRightListBox-right-prick-left" @click="goShopping(goodsInfo)">

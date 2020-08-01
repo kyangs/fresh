@@ -109,7 +109,7 @@
 				<view class="shopping-details-name">商品详情</view>
 				<view v-if="goods.attr_list && goods.attr_list.length > 0" class="shopping-details-specification">
 					<view class="shopping-details-specification-box">
-						<view v-for="attr in goods.attr_list" class="shopping-details-specification-box-list">
+						<view v-for="(attr,index) in goods.attr_list" :key="index" class="shopping-details-specification-box-list">
 							<view class="shopping-details-specification-box-list-left">
 								{{attr.attr_name}}
 							</view>
@@ -120,7 +120,7 @@
 					</view>
 				</view>
 				<view class="shopping-details-image">
-					<image v-for="row in goods.detail_image" :src="row" mode="aspectFill">
+					<image v-for="(row) in goods.detail_image" :key="row.id" :src="row.full_url" mode="aspectFill">
 
 					</image>
 				</view>
