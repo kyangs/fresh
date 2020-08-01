@@ -18,6 +18,7 @@ Vue.prototype.isTabBar = function(page) {
 		"/pages/class/class",
 		"/pages/index/index",
 		"/pages/find/find",
+		"/pages/home/home",
 	];
 	console.log(page)
 	for (let i = 0; i < tabar.length; i++) {
@@ -28,6 +29,9 @@ Vue.prototype.isTabBar = function(page) {
 	return false
 }
 
+Vue.prototype.cacheKey = {
+	userInfo: "userInfo"
+}
 // 路由跳转
 Vue.prototype.routerTo = function(url) {
 	let tabar = this.isTabBar(url)
@@ -65,10 +69,10 @@ Vue.prototype.request = function(request_url, data, method) {
 }
 
 
-Vue.prototype.get = function(request_url, data)  {
+Vue.prototype.get = function(request_url, data) {
 	return this.request(request_url, data, 'GET')
 }
-Vue.prototype.post = function(request_url, data){
+Vue.prototype.post = function(request_url, data) {
 	return this.request(request_url, data, 'POST')
 }
 Vue.prototype.put = function(request_url, data) {

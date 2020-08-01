@@ -164,18 +164,24 @@
 		methods: {
 			location() {
 				let _this = this
-		
+
+
 				uni.getLocation({
 					type: 'wgs84',
 					success: function(res) {
-						console.log(res.address)
 						_this.post("/location/location", {
 							latitude: res.latitude,
 							longitude: res.longitude,
 						}).then(response => {
+
+							console.log(response)
 							if (response.data.location) {
 								uni.setStorageSync('current_location', JSON.stringify(response.data.location))
-								_this.current_location = response.data.location.formatted_address
+								let pois = response.data.location.pois
+								if (pois && pois.length > 0) {
+									_this.current_location = pois[0].name
+								}
+
 							}
 						})
 					},
@@ -192,10 +198,10 @@
 
 				_this.post("/home/index", param).then(response => {
 					console.log(response)
-					if(response.data.adv_list.home){
+					if (response.data.adv_list.home) {
 						_this.swiperList = response.data.adv_list.home
 					}
-					
+
 					if (response.data.adv_list.home_notice) {
 						_this.advPosition.home_notice = response.data.adv_list.home_notice[0]
 					}
