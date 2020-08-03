@@ -1,86 +1,41 @@
-<template>
-	<view class="login">
-		<view class="status_bar">
-			<!-- 这里是状态栏 -->
-		</view>
+<template >
+	<view class="login" >
 		<view class="login-box">
 			<!-- 关闭按钮 -->
-			<view class="login-box-close">
-				<text class="lg text-gray cuIcon-close" @click="back"></text>
-			</view>
 			<!-- APP名称 -->
-			<view class="login-box-name">登陆</view>
-			<!-- 输入手机号 -->
-			<view class="login-box-phone">
-				<view class="login-box-phone-box">
-					<input class="login-box-phone-box-input" v-model="loginForm.account" type="number" placeholder="请输入手机号或账号"
-					 maxlength="11" mixlength="11" />
-				</view>
+			<view class="login-box-name">
+				是否同意获取您以下信息
 			</view>
 			<!-- 输入手机号 -->
-			<view class="login-box-phone" v-if="loginMode === 'PASS'">
-				<view class="login-box-phone-box">
-					<input class="login-box-phone-box-input" v-model="loginForm.password" type="password" placeholder="请输入密码" />
-				</view>
+			<view class="login-box-name">
+				昵称：
 			</view>
+			<view class="login-box-name">
+				头像：
+			</view>
+			<view class="login-box-name">
+				手机号：
+			</view>
+	
 			<!-- 提示文字 -->
 			<view class="login-box-prompt">
-				未注册的手机号,验证后自动创建账户
 			</view>
 			<!-- 获取验证码 -->
 			<view class="login-box-captcha">
 
-				<view class="login-button" v-if="loginMode === 'PASS'" @click="doLogin">
-					{{loginText}}
+				<view class="login-button"  @click="doLogin">
+					同意
 				</view>
-				<view v-else class="login-box-captcha-box" @click="goCode">
-					获取验证码
-				</view>
-			</view>
-			<!-- 遇到问题 -->
-			<view class="login-box-problem">
-				<view v-if="loginMode === 'PASS'" @click="loginByPassword">短信验证码登录</view>
-				<view v-else @click="loginByPassword">密码登陆</view>
-			</view>
-
-			<!-- 顶到到底部 -->
-
-			<view class="login-box-fixed">
-				<!-- 第三方登陆 -->
-				<view class="otherLoginTitle">————————其他登录方式————————</view>
-				<view class="login-box-party">
-					<view class="login-box-party-list">
-						<view class="login-box-party-list-icon">
-							<button open-type="getPhoneNumber"
-							 @getphonenumber="onGetphonenumber" 
-							 class="login-box-party-list-icon-box">
-								<u-icon name="weixin-fill" color="#00aa00" size="56"></u-icon>
-							</button>
-						</view>
-						<view class="login-box-party-list-name">微信</view>
-					</view>
-					<!-- 					<view class="login-box-party-list">
-						<view class="login-box-party-list-icon">
-							<view class="login-box-party-list-icon-box" @click="qqlogin">
-								<u-icon name="qq-fill" color="#00aa00" size="56"></u-icon>
-							</view>
-						</view>
-						<view class="login-box-party-list-name">QQ登录</view>
-					</view> -->
-				</view>
-				<!-- 协议 -->
-				<view class="login-box-fixed-foot">
-					<text>登陆代表你同意并遵守</text>
-					<navigator url="/pages/index/index" style="color: #29BF00;" open-type='switchTab' hover-class="none">
-						《 免责协议 》
-					</navigator>
+				<view class="login-button-reject"  @click="doLogin">
+					拒绝
 				</view>
 			</view>
-
+	
+	
 		</view>
 
 
-
+	
 	</view>
 </template>
 
@@ -88,8 +43,8 @@
 	export default {
 		data() {
 			return {
-				value: [0, 1, 2],
-				visible: true,
+				value:[0,1,2],
+				visible:true,
 				loginMode: 'PASS',
 				loginText: '立即登录',
 				loginForm: {
@@ -105,23 +60,6 @@
 			},
 			doLogin() {
 				let _this = this
-
-				if (_this.loginForm.account === '') {
-					uni.showToast({
-						icon: "none",
-						title: "请输入手机号或账号"
-					})
-					return
-				}
-
-				if (_this.loginForm.password === '') {
-
-					uni.showToast({
-						icon: "none",
-						title: "请输入密码"
-					})
-					return
-				}
 				_this.loginText = "正在登录...."
 				_this.post('/user/login', _this.loginForm).then(res => {
 					_this.loginText = "立即登录"
@@ -149,36 +87,48 @@
 					delta: 2
 				});
 			},
-			onGetphonenumber(e) {
-				let _this = this
-				if (e.detail.errMsg === 'getPhoneNumber:ok') {
-					uni.login({
-						provider: 'weixin',
-						success: function(loginRes) {
-							uni.authorize({
-								scope: 'scope.userInfo',
-								success() {
-									uni.getUserInfo({
-										provider: 'weixin',
-										success: function(infoRes) {
-											_this.post("/user/wx-login", {
-												phoneRow: e.detail,
-												loginRes: loginRes,
-												userInfo: infoRes,
-											})
-										}
-									});
-								}
-							})
-						}
-					});
-					
-					return
-				}
-				uni.showToast({
-					icon: "none",
-					title: "您已取消授权",
+			// 微信登录
+			weixinlogin() {
+				uni.authorize({
+					scope: 'scope.userInfo',
+					success() {
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: function(infoRes) {
+								console.log(infoRes)
+								console.log('用户昵称为：' + infoRes.userInfo.nickName);
+							}
+						});
+					}
 				})
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+
+						console.log(loginRes)
+					}
+				});
+			},
+			// qq登录
+			qqlogin() {
+				var _that = this
+				uni.login({
+					provider: 'qq',
+					success: function(loginRes) {
+						uni.authorize({
+							scope: 'scope.userLocation',
+							success() {
+								uni.getUserInfo({
+									provider: 'qq',
+									success: function(infoRes) {
+										console.log(infoRes)
+										_that.loginImage = infoRes.userInfo.figureurl_qq_2
+									}
+								});
+							}
+						})
+					}
+				});
 			},
 		}
 	}
@@ -214,9 +164,9 @@
 		width: 100%;
 		height: 172rpx;
 		line-height: 172rpx;
-		font-size: 50rpx;
+		font-size: 35rpx;
 		color: #000000;
-		padding: 0 82rpx;
+		padding: 0 70rpx;
 		box-sizing: border-box;
 	}
 
@@ -251,8 +201,10 @@
 	.login-box-captcha {
 		width: 100%;
 		height: 144rpx;
+		text-align: center;
 		padding: 28rpx 76rpx;
 		box-sizing: border-box;
+		
 	}
 
 	.login-box-captcha-box {
@@ -268,15 +220,29 @@
 	}
 
 	.login-button {
-		width: 100%;
-		height: 100%;
+		width: 40%;
+		height: 80rpx;
 		border-radius: 544rpx;
 		background: #00aa00;
 		color: #FFFFFF;
 		font-size: 30rpx;
 		font-weight: bold;
 		text-align: center;
-		line-height: 88rpx;
+		line-height: 80rpx;
+		float: left;
+	}
+
+	.login-button-reject {
+		width: 40%;
+		height: 80rpx;
+		border-radius: 544rpx;
+		background: #ff0000;
+		color: #FFFFFF;
+		font-size: 30rpx;
+		font-weight: bold;
+		text-align: center;
+		line-height: 80rpx;
+		float: right;
 	}
 
 	.login-box-problem {
@@ -328,7 +294,7 @@
 	}
 
 	.login-box-party-list {
-		width: 100%;
+		width: 50%;
 		height: 152rpx;
 	}
 

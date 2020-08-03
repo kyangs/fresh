@@ -107,7 +107,7 @@
 			<homeRecommend />
 		</view>
 		<!-- 版本 -->
-		<view class="home-version">当前版本1.0.0</view>
+		<!-- <view class="home-version">当前版本1.0.0</view> -->
 	</view>
 </template>
 

@@ -79,7 +79,14 @@
 					}
 				}
 			}
-		}, {
+		},
+		 {
+		 	"path": "pages/auth/auth",
+		 	"style": {
+		 		"navigationStyle": "custom"
+		 	}
+		 },
+		{
 			"path": "pages/setup/setup",
 			"style": {
 				"navigationBarTitleText": "应用设置",
