@@ -10,7 +10,7 @@
 					<view class="home-head-info-box-left">
 						<view class="home-head-info-box-left-image" @click="goPerson">
 							<image v-if="userInfo.full_avatar" :src="userInfo.full_avatar"></image>
-							<image v-else src="/static/image/home/default.jpg"></image>
+							<image v-else :src="defaultAvatar.avatar"></image>
 						</view>
 						<view v-if="!userInfo.id" 
 						 @click="goLogin"
@@ -116,12 +116,13 @@
 	export default {
 		data() {
 			return {
+				defaultAvatar:{},
 				userInfo: {},
 			}
 		},
 		onLoad(option) {
-			
 			this.initUserCenter()
+			this.getDefaultSetting()
 		},
 		methods: {
 			initUserCenter() {
@@ -130,6 +131,13 @@
 				if (userJson){
 					_this.userInfo = JSON.parse(uni.getStorageSync(_this.cacheKey.userInfo))
 				}
+			},
+			getDefaultSetting(){
+				let _this = this
+				_this.get("/user/default-icon").then(res=>{
+					console.log(res.data)
+					_this.defaultAvatar = res.data.avatar
+				})
 			},
 			goPerson() {
 				uni.navigateTo({

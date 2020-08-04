@@ -47,17 +47,17 @@
 
 			<view class="login-box-fixed">
 				<!-- 第三方登陆 -->
-				<view class="otherLoginTitle">————————其他登录方式————————</view>
+				<!-- <view class="otherLoginTitle">————————其他登录方式————————</view> -->
 				<view class="login-box-party">
 					<view class="login-box-party-list">
-						<view class="login-box-party-list-icon">
+						<!-- <view class="login-box-party-list-icon">
 							<button open-type="getPhoneNumber"
 							 @getphonenumber="onGetphonenumber" 
 							 class="login-box-party-list-icon-box">
 								<u-icon name="weixin-fill" color="#00aa00" size="56"></u-icon>
 							</button>
 						</view>
-						<view class="login-box-party-list-name">微信</view>
+						<view class="login-box-party-list-name">微信</view> -->
 					</view>
 					<!-- 					<view class="login-box-party-list">
 						<view class="login-box-party-list-icon">
@@ -104,8 +104,8 @@
 				this.loginMode = this.loginMode === 'SMS' ? 'PASS' : 'SMS'
 			},
 			doLogin() {
+				
 				let _this = this
-
 				if (_this.loginForm.account === '') {
 					uni.showToast({
 						icon: "none",
@@ -122,6 +122,7 @@
 					})
 					return
 				}
+				
 				_this.loginText = "正在登录...."
 				_this.post('/user/login', _this.loginForm).then(res => {
 					_this.loginText = "立即登录"
