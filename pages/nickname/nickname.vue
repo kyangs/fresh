@@ -4,10 +4,11 @@
 			请输入新昵称,30天修改一次
 		</view>
 		<view class="nickname-message">
-			 <input class="nickname-message-input" maxlength="15" placeholder="最大输入长度为15个字符" />
+			 <input class="nickname-message-input" maxlength="15"
+			  placeholder="最大输入长度为15个字符" v-model="userInfo.nickname" />
 		</view>
 		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-green margin-tb-sm lg">确认修改</button>
+			<button @click="modifyNickName" class="cu-btn bg-green margin-tb-sm lg">确认修改</button>
 		</view>
 	</view>
 </template>
@@ -16,11 +17,27 @@
 	export default {
 		data() {
 			return {
-				
+				userInfo:{},
 			}
 		},
+		onLoad() {
+			this.initUserCenter()
+		},
 		methods: {
-			
+			modifyNickName(){
+				let _this = this
+				_this.post("/user/info",_this.userInfo).then(res=>{
+					uni.setStorageSync(_this.cacheKey.userInfo,JSON.stringify(_this.userInfo))
+					_this.initUserCenter()
+				})
+			},
+			initUserCenter() {
+				let _this = this
+				let userJson = uni.getStorageSync(_this.cacheKey.userInfo)
+				if (userJson){
+					_this.userInfo = JSON.parse(uni.getStorageSync(_this.cacheKey.userInfo))
+				}
+			},
 		}
 	}
 </script>
