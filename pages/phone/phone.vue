@@ -16,7 +16,7 @@
 			<view class="title">验证码</view>
 			<input placeholder="请输入验证码" v-model="userInfo.code" name="input"></input>
 			<button 
-			:disabled="disabled || oldPhone===userInfo.phone || userInfo.phone.length !== 11" 
+			:disabled="disabled || oldPhone===userInfo.phone " 
 			@click="sendCode" 
 			class='cu-btn bg-green shadow'>{{codeTxt}}</button>
 		</view>
@@ -44,7 +44,7 @@
 			sendCode() {
 				let _this = this
 				_this.getVerificationCode(_this.userInfo.phone).then(res => {
-					if (res.data.code) {
+					if (res.data && res.data.code) {
 						let timeo = 60
 						let timeStop = setInterval(function() {
 							timeo--;

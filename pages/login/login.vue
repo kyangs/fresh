@@ -10,35 +10,35 @@
 			</view>
 			<!-- APP名称 -->
 			<view class="login-box-name">登陆</view>
-			<view v-if="loginMode==='SMS'">
+			<view v-if="loginForm.loginMode==='SMS'">
 				<view class="cu-form-group">
 					<view class="title">手机号</view>
 					<input placeholder="请输入手机号" maxlength="11" mixlength="11" name="account" v-model="loginForm.account"></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">验证码</view>
-					<input placeholder="请输入验证码" name="input"></input>
-					<button :disabled="disabledCodeComputed" class='cu-btn bg-green shadow'>获取验证码</button>
+					<input placeholder="请输入验证码" v-model="loginForm.smsCode" name="input"></input>
+					<button :disabled="disabledCodeComputed" @click="sendCode" class='cu-btn bg-green shadow'>{{codeTxt}}</button>
 				</view>
 				<!-- 提示文字 -->
-				<view  class="login-box-prompt">
+				<view class="login-box-prompt">
 					未注册的手机号,验证后自动创建账户
 				</view>
 			</view>
-			<view v-if="loginMode==='PASS'">
+			<view v-if="loginForm.loginMode==='PASS'">
 				<view class="cu-form-group">
 					<view class="title">登录账号</view>
-					<input placeholder="请输入手机号或账号"  name="account" v-model="loginForm.account"></input>
+					<input placeholder="请输入手机号或账号" name="account" v-model="loginForm.account"></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">登录密码</view>
-					<input placeholder="请输入登录密码" password name="password"></input>
+					<input placeholder="请输入登录密码" password name="password" v-model="loginForm.password"></input>
 				</view>
 			</view>
 			<!-- 输入手机号 -->
-			
+
 			<!-- 输入手机号 -->
-		
+
 			<!-- 获取验证码 -->
 			<view class="login-box-captcha">
 				<view class="login-button" @click="doLogin">
@@ -47,7 +47,7 @@
 			</view>
 			<!-- 遇到问题 -->
 			<view class="login-box-problem">
-				<view v-if="loginMode === 'PASS'" @click="loginByPassword">短信验证码登录</view>
+				<view v-if="loginForm.loginMode === 'PASS'" @click="loginByPassword">短信验证码登录</view>
 				<view v-else @click="loginByPassword">密码登陆</view>
 			</view>
 
@@ -98,28 +98,52 @@
 			return {
 				value: [0, 1, 2],
 				visible: true,
-				loginMode: 'PASS',
 				loginText: '立即登录',
+				disabledSendCode: false,
+				codeTxt: '获取验证码',
 				loginForm: {
 					account: '',
 					password: '',
-					sms_code: '',
+					smsCode: '',
+					loginMode: 'PASS',
 				}
 			}
 		},
 		computed: {
 			disabledCodeComputed() {
-				return this.verifyPhone(this.loginForm.account) === false
+				return this.verifyPhone(this.loginForm.account) === false || this.disabledSendCode
 			},
 		},
 		methods: {
-
+			sendCode() {
+				let _this = this
+				_this.getVerificationCode(_this.loginForm.account).then(res => {
+					if (res.data && res.data.code) {
+						let timeo = 60
+						let timeStop = setInterval(function() {
+							timeo--;
+							if (timeo > 0) {
+								_this.disabled = true
+								_this.disabledSendCode = true
+								_this.codeTxt = '(' + timeo + 's)后重新发送'
+							} else {
+								timeo = 60
+								_this.codeTxt = '获取验证码'
+								clearInterval(timeStop)
+								_this.disabled = false
+								_this.disabledSendCode = false
+							}
+						}, 1000)
+					}
+				})
+			},
 			loginByPassword() {
-				this.loginMode = this.loginMode === 'SMS' ? 'PASS' : 'SMS'
+				this.loginForm.loginMode = this.loginForm.loginMode === 'SMS' ? 'PASS' : 'SMS'
 			},
 			doLogin() {
 
 				let _this = this
+
 				if (_this.loginForm.account === '') {
 					uni.showToast({
 						icon: "none",
@@ -128,11 +152,18 @@
 					return
 				}
 
-				if (_this.loginForm.password === '') {
+				if (this.loginForm.loginMode === 'PASS' && _this.loginForm.password === '') {
 
 					uni.showToast({
 						icon: "none",
 						title: "请输入密码"
+					})
+					return
+				}
+				if (this.loginForm.loginMode === 'SMS' && _this.loginForm.smsCode === '') {
+					uni.showToast({
+						icon: "none",
+						title: "请验证码"
 					})
 					return
 				}
