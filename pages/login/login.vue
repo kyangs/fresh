@@ -10,31 +10,39 @@
 			</view>
 			<!-- APP名称 -->
 			<view class="login-box-name">登陆</view>
-			<!-- 输入手机号 -->
-			<view class="login-box-phone">
-				<view class="login-box-phone-box">
-					<input class="login-box-phone-box-input" v-model="loginForm.account" type="number" placeholder="请输入手机号或账号"
-					 maxlength="11" mixlength="11" />
+			<view v-if="loginMode==='SMS'">
+				<view class="cu-form-group">
+					<view class="title">手机号</view>
+					<input placeholder="请输入手机号" maxlength="11" mixlength="11" name="account" v-model="loginForm.account"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">验证码</view>
+					<input placeholder="请输入验证码" name="input"></input>
+					<button :disabled="disabledCodeComputed" class='cu-btn bg-green shadow'>获取验证码</button>
+				</view>
+				<!-- 提示文字 -->
+				<view  class="login-box-prompt">
+					未注册的手机号,验证后自动创建账户
+				</view>
+			</view>
+			<view v-if="loginMode==='PASS'">
+				<view class="cu-form-group">
+					<view class="title">登录账号</view>
+					<input placeholder="请输入手机号或账号"  name="account" v-model="loginForm.account"></input>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">登录密码</view>
+					<input placeholder="请输入登录密码" password name="password"></input>
 				</view>
 			</view>
 			<!-- 输入手机号 -->
-			<view class="login-box-phone" v-if="loginMode === 'PASS'">
-				<view class="login-box-phone-box">
-					<input class="login-box-phone-box-input" v-model="loginForm.password" type="password" placeholder="请输入密码" />
-				</view>
-			</view>
-			<!-- 提示文字 -->
-			<view class="login-box-prompt">
-				未注册的手机号,验证后自动创建账户
-			</view>
+			
+			<!-- 输入手机号 -->
+		
 			<!-- 获取验证码 -->
 			<view class="login-box-captcha">
-
-				<view class="login-button" v-if="loginMode === 'PASS'" @click="doLogin">
+				<view class="login-button" @click="doLogin">
 					{{loginText}}
-				</view>
-				<view v-else class="login-box-captcha-box" @click="goCode">
-					获取验证码
 				</view>
 			</view>
 			<!-- 遇到问题 -->
@@ -99,12 +107,18 @@
 				}
 			}
 		},
+		computed: {
+			disabledCodeComputed() {
+				return this.verifyPhone(this.loginForm.account) === false
+			},
+		},
 		methods: {
+
 			loginByPassword() {
 				this.loginMode = this.loginMode === 'SMS' ? 'PASS' : 'SMS'
 			},
 			doLogin() {
-				
+
 				let _this = this
 				if (_this.loginForm.account === '') {
 					uni.showToast({
@@ -122,7 +136,7 @@
 					})
 					return
 				}
-				
+
 				_this.loginText = "正在登录...."
 				_this.post('/user/login', _this.loginForm).then(res => {
 					_this.loginText = "立即登录"
@@ -173,7 +187,7 @@
 							})
 						}
 					});
-					
+
 					return
 				}
 				uni.showToast({
@@ -260,7 +274,7 @@
 		width: 100%;
 		height: 100%;
 		border-radius: 544rpx;
-		background: #D6D6D6;
+		background: #00aa00;
 		color: #FFFFFF;
 		font-size: 30rpx;
 		font-weight: bold;

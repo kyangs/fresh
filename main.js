@@ -83,6 +83,12 @@ Vue.prototype.put = function(request_url, data) {
 Vue.prototype.getVerificationCode = function(phone) {
 	return this.request("/verification/code", {phone:phone}, 'POST')
 }
+// 匹配手机号是否正确
+Vue.prototype.verifyPhone = function(phone) {
+	let patt = /^1[3456789]\d{9}$/
+	return patt.test(phone)
+}
+
 
 
 // 引入全局uView
