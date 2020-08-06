@@ -46,6 +46,17 @@
 					}
 				}
 			}
+		},{
+			"path": "pages/password/password", // 个人主页
+			"style": {
+				"navigationBarTitleText": "密码修改",
+				"app-plus": {
+					"bounce": "none", //关闭窗口回弹效果
+					"titleNView": {
+						"titleAlign": "left"
+					}
+				}
+			}
 		}, {
 			"path": "pages/nickname/nickname",
 			"style": {

@@ -46,6 +46,15 @@
 					<text class="lg text-gray cuIcon-right"></text>
 				</view>
 			</view>
+			<view class="person-box-list" @click="goPassword">
+				<view class="person-box-list-left">
+					密码修改
+				</view>
+				<view class="person-box-list-right">
+				
+					<text class="lg text-gray cuIcon-right"></text>
+				</view>
+			</view>
 
 		</view>
 		<!-- 时间选择器 -->
@@ -100,6 +109,12 @@
 			goPhone() {
 				uni.navigateTo({
 					url: '/pages/phone/phone'
+				});
+			},
+			// 去修该手机号
+			goPassword() {
+				uni.navigateTo({
+					url: '/pages/password/password'
 				});
 			},
 			// 去修该性别

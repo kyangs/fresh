@@ -78,6 +78,13 @@ Vue.prototype.post = function(request_url, data) {
 Vue.prototype.put = function(request_url, data) {
 	return this.request(request_url, data, 'PUT')
 }
+
+// 发送验证码统一请求
+Vue.prototype.getVerificationCode = function(phone) {
+	return this.request("/verification/code", {phone:phone}, 'POST')
+}
+
+
 // 引入全局uView
 import uView from "@/uview/index";
 Vue.use(uView);

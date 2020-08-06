@@ -12,10 +12,11 @@
 							<image v-if="userInfo.full_avatar" :src="userInfo.full_avatar"></image>
 							<image v-else :src="defaultAvatar.avatar"></image>
 						</view>
-						<view v-if="!userInfo.id" 
-						 @click="goLogin"
-						class="home-head-info-box-left-info">
+						<view v-if="!userInfo.id" @click="goLogin" class="home-head-info-box-left-info">
 							登陆 / 注册
+						</view>
+						<view v-else  @click="goPerson" class="home-head-info-box-left-info">
+							{{userInfo.nickname}}
 						</view>
 					</view>
 					<view class="home-head-info-box-right" @click="goSetup">
@@ -236,7 +237,7 @@
 		flex: 1;
 		height: 110rpx;
 		line-height: 110rpx;
-		font-size: 38rpx;
+		font-size: 30rpx;
 		color: #FFFFFF;
 		font-weight: 600;
 	}
