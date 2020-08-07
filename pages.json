@@ -28,17 +28,20 @@
 		}, {
 			"path": "pages/home/home", // 我的
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh":true
 			}
 		}, {
 			"path": "pages/shopping/shopping", //商品详情页
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh":true
 			}
 		}, {
 			"path": "pages/person/person", // 个人主页
 			"style": {
 				"navigationBarTitleText": "个人资料",
+				"enablePullDownRefresh":true,
 				"app-plus": {
 					"bounce": "none", //关闭窗口回弹效果
 					"titleNView": {

@@ -51,7 +51,7 @@
 					密码修改
 				</view>
 				<view class="person-box-list-right">
-				
+
 					<text class="lg text-gray cuIcon-right"></text>
 				</view>
 			</view>
@@ -74,6 +74,11 @@
 		onLoad() {
 			this.initUserCenter()
 			this.getDefaultSetting()
+			
+		},
+		onPullDownRefresh() {
+			this.initUserCenter()
+			uni.stopPullDownRefresh()
 		},
 		methods: {
 			initUserCenter() {
@@ -93,9 +98,9 @@
 			// 选择生日时间
 			selectTime(time) {
 				let _this = this
-				_this.userInfo.birth = time.year+'-'+time.month+'-'+time.day
-				_this.post("/user/info",_this.userInfo).then(res=>{
-					uni.setStorageSync(_this.cacheKey.userInfo,JSON.stringify(_this.userInfo))
+				_this.userInfo.birth = time.year + '-' + time.month + '-' + time.day
+				_this.post("/user/info", _this.userInfo).then(res => {
+					uni.setStorageSync(_this.cacheKey.userInfo, JSON.stringify(_this.userInfo))
 					_this.initUserCenter()
 				})
 			},
@@ -140,7 +145,7 @@
 							success: (uploadRes) => {
 								let userInfo = JSON.parse(uploadRes.data)
 								console.log(userInfo)
-								uni.setStorageSync(_this.cacheKey.userInfo,JSON.stringify(userInfo.data))
+								uni.setStorageSync(_this.cacheKey.userInfo, JSON.stringify(userInfo.data))
 								_this.initUserCenter()
 							}
 						});

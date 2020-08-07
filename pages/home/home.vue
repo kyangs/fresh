@@ -127,6 +127,10 @@
 			this.initUserCenter()
 			this.getDefaultSetting()
 		},
+		onPullDownRefresh() {
+			this.initUserCenter()
+			uni.stopPullDownRefresh()
+		},
 		methods: {
 			initUserCenter() {
 				let _this = this
