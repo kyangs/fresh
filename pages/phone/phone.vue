@@ -14,11 +14,8 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">验证码</view>
-			<input placeholder="请输入验证码" v-model="userInfo.code" name="input"></input>
-			<button 
-			:disabled="disabled || oldPhone===userInfo.phone " 
-			@click="sendCode" 
-			class='cu-btn bg-green shadow'>{{codeTxt}}</button>
+			<input placeholder="请输入验证码" v-model="smsCode" name="input"></input>
+			<button :disabled="disabled || oldPhone===userInfo.phone " @click="sendCode" class='cu-btn bg-green shadow'>{{codeTxt}}</button>
 		</view>
 
 		<view class="padding flex flex-direction">
@@ -33,6 +30,7 @@
 			return {
 				userInfo: {},
 				oldPhone: '',
+				smsCode: '',
 				disabled: false,
 				codeTxt: "获取验证码",
 			}
@@ -63,12 +61,31 @@
 			},
 			modify() {
 				let _this = this
-				_this.post("/user/info", _this.userInfo).then(res => {
+				if(!_this.smsCode || _this.smsCode===undefined){
+					uni.showToast({
+						icon: "none",
+						title: "请输入验证码",
+					})
+					return
+				}
+				let userInfo = Object.assign({
+					modifyPhone: true,
+					smsCode: _this.smsCode,
+				}, _this.userInfo)
+				
+				_this.post("/user/info", userInfo).then(res => {
+					if(!res.data){
+						uni.showToast({
+							icon: "none",
+							title: "修改失败",
+						})
+						return
+					}
 					uni.setStorageSync(_this.cacheKey.userInfo, JSON.stringify(_this.userInfo))
 					_this.initUserCenter()
 					uni.showToast({
-						icon:"none",
-						title:"修改成功",
+						icon: "none",
+						title: "修改成功",
 					})
 					setTimeout(function() {
 						_this.routerTo('/pages/person/person')
