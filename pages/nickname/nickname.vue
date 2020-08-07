@@ -1,7 +1,7 @@
 <template>
 	<view class="nickname">
 		<view class="nickname-title">
-			请输入新昵称,30天修改一次
+			请输入新昵称
 		</view>
 		<view class="nickname-message">
 			 <input class="nickname-message-input" maxlength="15"
@@ -29,6 +29,13 @@
 				_this.post("/user/info",_this.userInfo).then(res=>{
 					uni.setStorageSync(_this.cacheKey.userInfo,JSON.stringify(_this.userInfo))
 					_this.initUserCenter()
+					uni.showToast({
+						icon:"none",
+						title:"修改成功",
+					})
+					setTimeout(function() {
+						_this.routerTo('/pages/person/person')
+					}, 1500);
 				})
 			},
 			initUserCenter() {

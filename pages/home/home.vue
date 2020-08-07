@@ -15,8 +15,10 @@
 						<view v-if="!userInfo.id" @click="goLogin" class="home-head-info-box-left-info">
 							登陆 / 注册
 						</view>
-						<view v-else  @click="goPerson" class="home-head-info-box-left-info">
-							{{userInfo.nickname}}
+
+						<view v-else @click="goPerson" class="home-head-info-box-left-info">
+							<text class="acount-center">{{userInfo.nickname}}</text>
+							<text class="acount-center">{{userInfo.account}}</text>
 						</view>
 					</view>
 					<view class="home-head-info-box-right" @click="goSetup">
@@ -117,7 +119,7 @@
 	export default {
 		data() {
 			return {
-				defaultAvatar:{},
+				defaultAvatar: {},
 				userInfo: {},
 			}
 		},
@@ -129,13 +131,13 @@
 			initUserCenter() {
 				let _this = this
 				let userJson = uni.getStorageSync(_this.cacheKey.userInfo)
-				if (userJson){
+				if (userJson) {
 					_this.userInfo = JSON.parse(uni.getStorageSync(_this.cacheKey.userInfo))
 				}
 			},
-			getDefaultSetting(){
+			getDefaultSetting() {
 				let _this = this
-				_this.get("/user/default-icon").then(res=>{
+				_this.get("/user/default-icon").then(res => {
 					console.log(res.data)
 					_this.defaultAvatar = res.data.avatar
 				})
@@ -170,9 +172,9 @@
 					url: '/pages/wallet/wallet'
 				});
 			},
-			goLogin(){
+			goLogin() {
 				uni.navigateTo({
-				    url: '/pages/login/login'
+					url: '/pages/login/login'
 				});
 			},
 		},
@@ -231,6 +233,12 @@
 	.home-head-info-box-left-image image {
 		width: 110rpx;
 		height: 110rpx;
+	}
+
+	.acount-center {
+		display: block;
+		height: 55rpx;
+		line-height: 55rpx;
 	}
 
 	.home-head-info-box-left-info {
