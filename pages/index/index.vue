@@ -197,7 +197,7 @@
 				let param = {}
 
 				_this.post("/home/index", param).then(response => {
-					console.log(response)
+				
 					if (response.data.adv_list.home) {
 						_this.swiperList = response.data.adv_list.home
 					}

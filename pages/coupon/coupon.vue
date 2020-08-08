@@ -6,13 +6,13 @@
 		<!-- 导航 -->
 		<view class="coupon-head">
 			<view class="coupon-head-icon">
-				<text class="lg text-gray cuIcon-back"></text>
+				<text class="lg text-gray cuIcon-back" @click="goBack"></text>
 			</view>
 			<view class="coupon-head-name">
 				优惠券
 			</view>
 			<view class="coupon-head-right">
-				兑换优惠券
+				<!-- 兑换优惠券 -->
 			</view>
 		</view>
 		<!-- 优惠券 -->
@@ -148,6 +148,11 @@
 			}
 		},
 		methods: {
+			goBack(){
+				uni.navigateBack({
+					delta:1,
+				})
+			},
 			goFailure(){
 				uni.navigateTo({
 				    url: '/pages/failure/failure'

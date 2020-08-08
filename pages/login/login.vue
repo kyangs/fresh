@@ -41,9 +41,9 @@
 
 			<!-- 获取验证码 -->
 			<view class="login-box-captcha">
-				<view class="login-button" @click="doLogin">
+				<button class="login-button" :disabled="disabledLogin" @click="doLogin">
 					{{loginText}}
-				</view>
+				</button>
 			</view>
 			<!-- 遇到问题 -->
 			<view class="login-box-problem">
@@ -100,6 +100,7 @@
 				visible: true,
 				loginText: '立即登录',
 				disabledSendCode: false,
+				disabledLogin: false,
 				codeTxt: '获取验证码',
 				loginForm: {
 					account: '',
@@ -169,8 +170,10 @@
 				}
 
 				_this.loginText = "正在登录...."
+				_this.disabledLogin=true
 				_this.post('/user/login', _this.loginForm).then(res => {
 					_this.loginText = "立即登录"
+					_this.disabledLogin=false
 					if (!res) return
 
 					uni.setStorageSync(_this.cacheKey.userInfo, JSON.stringify(res.data))

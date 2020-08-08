@@ -54,8 +54,17 @@
 				</view>
 			</view>
 		</view>
+		
 		<!-- 订单列表 -->
 		<view class="home-order">
+			<view class="cu-form-group margin-top ">
+				<view class="setup-box-list-left" @click="goOrder(0)">
+					全部订单
+				</view>
+				<view class="setup-box-list-right" @click="goOrder(0)">
+					<text class="lg text-gray cuIcon-right"></text>
+				</view>
+			</view>
 			<view class="home-order-box">
 				<view class="home-order-box-list" @click="goOrder(0)">
 					<view class="home-order-box-list-icon home-order-box-list-icon-image">
@@ -100,9 +109,16 @@
 			</view>
 		</view>
 		<!-- 轮播图 -->
-		<view class="home-swipe">
+		<view class="home-swipe" v-if="centerAdvList.length > 0">
 			<view class="home-swipe-box">
+				<swiper class="main-ad" :autoplay="true" :interval="2000" :duration="500">
+					<swiper-item v-for="(adv,index) in centerAdvList" :key="index">
 
+						<image class="main-ad" @click="routerTo(adv.link)" :src="adv.full_path"></image>
+
+					</swiper-item>
+
+				</swiper>
 			</view>
 		</view>
 		<!-- 推荐功能 -->
@@ -121,6 +137,14 @@
 			return {
 				defaultAvatar: {},
 				userInfo: {},
+				centerAdvList: [],
+				order:{
+					all:0,
+					waitPay:0,
+					doing:0,
+					waitPinJia:0,
+					refound:0,
+				}
 			}
 		},
 		onLoad(option) {
@@ -138,7 +162,16 @@
 				if (userJson) {
 					_this.userInfo = JSON.parse(uni.getStorageSync(_this.cacheKey.userInfo))
 				}
+				_this.getAdv("center").then(res => {
+
+					console.log(res.data.center)
+					if (res.data && res.data.center) {
+						_this.centerAdvList = res.data.center
+					}
+
+				})
 			},
+
 			getDefaultSetting() {
 				let _this = this
 				_this.get("/user/default-icon").then(res => {
@@ -234,6 +267,14 @@
 		margin-right: 20rpx;
 	}
 
+	/* 广告 */
+	.main-ad {
+		width: 100%;
+		height: 152rpx;
+		padding-bottom: 10rpx;
+		background: #FFFFFF;
+	}
+
 	.home-head-info-box-left-image image {
 		width: 110rpx;
 		height: 110rpx;
@@ -315,6 +356,7 @@
 		width: 100%;
 		height: auto;
 		padding: 0 24rpx;
+		border-radius: 20rpx;
 		box-sizing: border-box;
 		margin-bottom: 22rpx;
 	}
@@ -322,7 +364,7 @@
 	.home-order-box {
 		width: 100%;
 		background: #FFFFFF;
-		border-radius: 20rpx;
+		/*  */
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-around;

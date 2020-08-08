@@ -89,6 +89,11 @@ Vue.prototype.verifyPhone = function(phone) {
 	return patt.test(phone)
 }
 
+// 匹配手机号是否正确
+Vue.prototype.getAdv = function(position) {
+	return this.request("/adv/list", {position:position}, 'GET')
+}
+
 
 
 // 引入全局uView

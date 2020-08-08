@@ -2,16 +2,8 @@
 	<view class="setup">
 		<view class="setup-box">
 			<view class="setup-box-list">
-				<view class="setup-box-list-left">
+				<view class="setup-box-list-left" @click="clearCache">
 					清除缓存
-				</view>
-				<view class="setup-box-list-right">
-
-				</view>
-			</view>
-			<view class="setup-box-list">
-				<view class="setup-box-list-left">
-					检查更新
 				</view>
 				<view class="setup-box-list-right">
 
@@ -41,14 +33,6 @@
 					<text class="lg text-gray cuIcon-right"></text>
 				</view>
 			</view>
-			<view class="setup-box-list">
-				<view class="setup-box-list-left">
-					开源代码
-				</view>
-				<view class="setup-box-list-right">
-					<text class="lg text-gray cuIcon-right"></text>
-				</view>
-			</view>
 		</view>
 		<view class="gender-quit" @click="goLoginOut">退出登陆</view>
 	</view>
@@ -62,6 +46,12 @@
 			}
 		},
 		methods: {
+			clearCache(){
+				uni.showToast({
+					icon: "none",
+					title: "清理成功",
+				})
+			},
 			goLoginOut() {
 				let _this = this
 				uni.clearStorageSync(_this.cacheKey.userInfo)
