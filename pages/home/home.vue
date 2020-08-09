@@ -57,16 +57,14 @@
 		
 		<!-- 订单列表 -->
 		<view class="home-order">
-			<view class="cu-form-group margin-top ">
-				<view class="setup-box-list-left" @click="goOrder(0)">
-					全部订单
-				</view>
+			<view class="cu-form-group home-order-top" >
+				<view  @click="goOrder(0)">全部订单</view>
 				<view class="setup-box-list-right" @click="goOrder(0)">
 					<text class="lg text-gray cuIcon-right"></text>
 				</view>
 			</view>
 			<view class="home-order-box">
-				<view class="home-order-box-list" @click="goOrder(0)">
+				<view class="home-order-box-list" @click="goOrder(1)">
 					<view class="home-order-box-list-icon home-order-box-list-icon-image">
 						<!-- <text class="iconfont icon-daizhifu"></text> -->
 						<image src="../../static/image/home/zf.png"></image>
@@ -76,7 +74,7 @@
 						待支付
 					</view>
 				</view>
-				<view class="home-order-box-list" @click="goOrder(1)">
+				<view class="home-order-box-list" @click="goOrder(2)">
 					<view class="home-order-box-list-icon home-order-box-list-icon-image">
 						<!-- <text class="iconfont icon-daishouhuo"></text> -->
 						<image src="../../static/image/home/shouhuo.png"></image>
@@ -86,7 +84,7 @@
 						进行中
 					</view>
 				</view>
-				<view class="home-order-box-list" @click="goOrder(2)">
+				<view class="home-order-box-list" @click="goOrder(3)">
 					<view class="home-order-box-list-icon home-order-box-list-icon-image">
 						<!-- <text class="iconfont icon-ai-message"></text> -->
 						<image src="../../static/image/home/news.png"></image>
@@ -350,7 +348,10 @@
 		font-weight: bold;
 		color: #1A1B1E;
 	}
-
+	.home-order-top{
+		border-top-right-radius: 20rpx;
+		border-top-left-radius: 20rpx;
+	}
 	/* 订单 */
 	.home-order {
 		width: 100%;
@@ -364,7 +365,8 @@
 	.home-order-box {
 		width: 100%;
 		background: #FFFFFF;
-		/*  */
+		border-bottom-right-radius: 20rpx;
+		border-bottom-left-radius: 20rpx;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-around;
