@@ -5,6 +5,7 @@ Vue.config.productionTip = false
 
 App.mpType = 'app'
 Vue.prototype.url = 'http://api.fresh.com/api';
+Vue.prototype.currentUser = {};
 Vue.prototype.now = Date.now || function() {
 	return new Date().getTime();
 }
@@ -20,7 +21,7 @@ Vue.prototype.isTabBar = function(page) {
 		"/pages/find/find",
 		"/pages/home/home",
 	];
-	console.log(page)
+
 	for (let i = 0; i < tabar.length; i++) {
 		if (page.search(tabar[i]) !== -1) {
 			return true
@@ -77,6 +78,16 @@ Vue.prototype.post = function(request_url, data) {
 }
 Vue.prototype.put = function(request_url, data) {
 	return this.request(request_url, data, 'PUT')
+}
+Vue.prototype.isLogin = function(request_url, data) {
+
+	let josnStr = uni.getStorageSync(this.cacheKey.userInfo)
+	if (josnStr){
+		this.currentUser = JSON.parse(josnStr)
+		return true
+	}
+	return false
+	
 }
 
 // 发送验证码统一请求

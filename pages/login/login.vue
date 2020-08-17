@@ -107,7 +107,13 @@
 					password: '',
 					smsCode: '',
 					loginMode: 'PASS',
-				}
+				},
+				urlTo:'/pages/home/home?event=login',
+			}
+		},
+		onLoad(option) {
+			if(option.url){
+				this.urlTo = option.url
 			}
 		},
 		computed: {
@@ -183,7 +189,7 @@
 					})
 
 					setTimeout(function() {
-						_this.routerTo('/pages/home/home?event=login')
+						_this.routerTo(_this.urlTo)
 					}, 1500);
 
 				})
