@@ -69,7 +69,17 @@
 					number: 1,
 				}
 				_this.post("/cart/enter", param).then(res=>{
-					console.log(param)
+					if(res.code === 10000){
+						uni.showToast({
+							title:'已加入购物车',
+							icon:"none"
+						})
+						return
+					}
+					uni.showToast({
+						title:'加入购物车失败',
+						icon:"none"
+					})
 				})
 			},
 		}

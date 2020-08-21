@@ -113,7 +113,7 @@
 </template>
 
 <script>
-	import charList from '../../components/charList.vue'
+	import charList from '@/components/charList.vue'
 	export default {
 		data() {
 			return {
