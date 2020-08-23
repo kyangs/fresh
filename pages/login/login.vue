@@ -124,6 +124,7 @@
 		methods: {
 			sendCode() {
 				let _this = this
+				_this.disabledSendCode = true
 				_this.getVerificationCode(_this.loginForm.account).then(res => {
 					if (res.data && res.data.code) {
 						let timeo = 60
@@ -141,7 +142,9 @@
 								_this.disabledSendCode = false
 							}
 						}, 1000)
+						return
 					}
+					_this.disabledSendCode =false
 				})
 			},
 			loginByPassword() {

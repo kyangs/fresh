@@ -79,6 +79,9 @@ Vue.prototype.post = function(request_url, data) {
 Vue.prototype.put = function(request_url, data) {
 	return this.request(request_url, data, 'PUT')
 }
+Vue.prototype.del = function(request_url, data) {
+	return this.request(request_url, data, 'DELETE')
+}
 Vue.prototype.isLogin = function(request_url, data) {
 
 	let josnStr = uni.getStorageSync(this.cacheKey.userInfo)
