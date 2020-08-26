@@ -161,9 +161,8 @@
 					_this.userInfo = JSON.parse(uni.getStorageSync(_this.cacheKey.userInfo))
 				}
 				_this.getAdv("center").then(res => {
-
-					console.log(res.data.center)
-					if (res.data && res.data.center) {
+		
+					if (res && res.data && res.data.center) {
 						_this.centerAdvList = res.data.center
 					}
 
@@ -173,8 +172,11 @@
 			getDefaultSetting() {
 				let _this = this
 				_this.get("/user/default-icon").then(res => {
-					console.log(res.data)
-					_this.defaultAvatar = res.data.avatar
+					
+					if(res.data){
+					_this.defaultAvatar = res.data.avatar	
+					}
+					
 				})
 			},
 			goPerson() {

@@ -30,11 +30,11 @@
 								<u-checkbox v-model="item.checked" size="40" shape="circle"></u-checkbox>
 							</u-checkbox-group>
 						</view>
-						<view class="charList-image">
+						<view class="charList-image" @click="routerTo('/pages/shopping/shopping?goodsId='+item.goods.id)">
 							<image :src="item.goods.main_image_url"></image>
 						</view>
 						<view class="charList-right">
-							<view class="charList-right-name">
+							<view class="charList-right-name" @click="routerTo('/pages/shopping/shopping?goodsId='+item.goods.id)">
 								<text class="charList-right-name-lable">{{item.goods.self_sale}}</text>
 								<text class="charList-right-name-text">{{item.goods.goods_name}}</text>
 							</view>

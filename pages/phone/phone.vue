@@ -41,22 +41,26 @@
 		methods: {
 			sendCode() {
 				let _this = this
+				let timeo = 60
+				_this.disabled = true
+				let timeStop = setInterval(function() {
+					timeo--;
+					if (timeo > 0) {
+						_this.disabled = true
+						_this.codeTxt = '(' + timeo + 's)后重新发送'
+					} else {
+						timeo = 60
+						_this.codeTxt = '获取验证码'
+						clearInterval(timeStop)
+						_this.disabled = false
+					}
+				}, 1000)
 				_this.getVerificationCode(_this.userInfo.phone).then(res => {
 					if (res.data && res.data.code) {
-						let timeo = 60
-						let timeStop = setInterval(function() {
-							timeo--;
-							if (timeo > 0) {
-								_this.disabled = true
-								_this.codeTxt = '(' + timeo + 's)后重新发送'
-							} else {
-								timeo = 60
-								_this.codeTxt = '获取验证码'
-								clearInterval(timeStop)
-								_this.disabled = false
-							}
-						}, 1000)
+						return
 					}
+				
+					_this.disabled = false
 				})
 			},
 			modify() {
