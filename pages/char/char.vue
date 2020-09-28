@@ -159,6 +159,10 @@
 			}
 
 		},
+		onPullDownRefresh() {
+			this.getCartList()
+			uni.stopPullDownRefresh()
+		},
 		methods: {
 			clickCartItem(index, index1) {
 				let _this = this

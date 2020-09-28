@@ -175,7 +175,7 @@
 			</view>
 			<view class="shopping-char-right">
 				<view class="shopping-char-right-box">
-					<view class="shopping-char-right-box-left">加入购物车</view>
+					<view class="shopping-char-right-box-left" @click="addCart(goods.id)">加入购物车</view>
 					<view class="shopping-char-right-box-right">立即购买</view>
 				</view>
 			</view>

@@ -107,6 +107,43 @@ Vue.prototype.verifyPhone = function(phone) {
 Vue.prototype.getAdv = function(position) {
 	return this.request("/adv/list", {position:position}, 'GET')
 }
+// 匹配手机号是否正确
+Vue.prototype.addCart = function(goodsID,number = 1,navigateTo='/pages/class/class') {
+	
+		if (!this.isLogin()) {
+			uni.showModal({
+				content: "加入购物车，需要您先登录",
+				confirmText: "去登录",
+				cancelText: "先看看",
+				success: function(res) {
+					if (res.confirm) {
+						uni.navigateTo({
+							url: '/pages/login/login?url='+navigateTo
+						});
+					}
+				}
+			})
+			return
+		}
+		let param = {
+			user: this.currentUser.id,
+			goodsId: goodsID,
+			number: 1,
+		}
+		this.post("/cart/enter", param).then(res=>{
+			if(res.code === 10000){
+				uni.showToast({
+					title:'加入购物车成功',
+					icon:"none"
+				})
+				return
+			}
+			uni.showToast({
+				title:'加入购物车失败',
+				icon:"none"
+			})
+		})
+}
 
 
 

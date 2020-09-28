@@ -46,41 +46,7 @@
 				console.log('跳转')
 			},
 			addToMyCart(row) {
-				let _this = this
-
-				if (!_this.isLogin()) {
-					uni.showModal({
-						content: "加入购物车，需要您先登录",
-						confirmText: "去登录",
-						cancelText: "先看看",
-						success: function(res) {
-							if (res.confirm) {
-								uni.navigateTo({
-									url: '/pages/login/login?url=/pages/class/class'
-								});
-							}
-						}
-					})
-					return
-				}
-				let param = {
-					user: _this.currentUser.id,
-					goodsId: row.id,
-					number: 1,
-				}
-				_this.post("/cart/enter", param).then(res=>{
-					if(res.code === 10000){
-						uni.showToast({
-							title:'已加入购物车',
-							icon:"none"
-						})
-						return
-					}
-					uni.showToast({
-						title:'加入购物车失败',
-						icon:"none"
-					})
-				})
+				this.addCart(row.id)
 			},
 		}
 	}

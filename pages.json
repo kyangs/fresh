@@ -23,7 +23,8 @@
 		}, {
 			"path": "pages/char/char", // 购物车
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh":true
 			}
 		}, {
 			"path": "pages/home/home", // 我的
